@@ -1,0 +1,35 @@
+﻿<Window x:Class="CRUD_Inventory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:vm="clr-namespace:CRUD_Inventory.ViewModel"
+        mc:Ignorable="d ignore"
+        Height="300"
+        Width="300"
+        Title="Item list - MVVM light"
+        DataContext="{Binding ItemListViewModel, Source={StaticResource Locator}}">
+    
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Top">
+            <ListBox ItemsSource="{Binding items}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Width="100">
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"></TextBlock>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </UniformGrid>
+        <Grid DockPanel.Dock="Bottom">
+            <Button Command="{Binding AddItemToInventoryCommand}">Add item</Button>
+        </Grid>
+    </DockPanel>
+</Window>
